@@ -4,6 +4,7 @@ import com.logikamobile.fisioterapp.data.configureDatabases
 import com.logikamobile.fisioterapp.plugins.configureSerialization
 import com.logikamobile.fisioterapp.routing.configureDashboardRoutes
 import com.logikamobile.fisioterapp.routing.configurePatientRoutes
+import com.logikamobile.fisioterapp.routing.configurePdfRoutes
 import com.logikamobile.fisioterapp.routing.configureSessionRoutes
 import com.logikamobile.fisioterapp.routing.configureTransactionRoutes
 import io.ktor.server.application.*
@@ -19,4 +20,5 @@ fun Application.module() {
     configureSessionRoutes()
     configurePatientRoutes()
     configureDashboardRoutes()
+    configurePdfRoutes()
 }

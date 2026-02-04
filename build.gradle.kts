@@ -33,6 +33,7 @@ dependencies {
     implementation("org.jetbrains.exposed:exposed-jdbc:0.50.0")
     implementation("org.jetbrains.exposed:exposed-dao:0.50.0")
     implementation ("org.jetbrains.exposed:exposed-java-time:0.50.0")
+    implementation("com.github.librepdf:openpdf:1.3.30")
     testRuntimeOnly("org.junit.platform:junit-platform-launcher")
     testImplementation("org.junit.jupiter:junit-jupiter:5.10.0")
     testImplementation("io.mockk:mockk:1.13.5")
