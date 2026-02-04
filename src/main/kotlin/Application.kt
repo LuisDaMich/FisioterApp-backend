@@ -1,5 +1,6 @@
 package com.logikamobile.fisioterapp
 
+import com.logikamobile.fisioterapp.routing.patientRouting
 import io.ktor.server.application.*
 
 fun main(args: Array<String>) {
