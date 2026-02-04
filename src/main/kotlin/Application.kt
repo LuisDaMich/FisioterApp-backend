@@ -2,8 +2,9 @@ package com.logikamobile.fisioterapp
 
 import com.logikamobile.fisioterapp.data.configureDatabases
 import com.logikamobile.fisioterapp.plugins.configureSerialization
-import com.logikamobile.fisioterapp.routing.patientRouting
-import com.logikamobile.fisioterapp.routing.transactionRoutes
+import com.logikamobile.fisioterapp.routing.configurePatientRoutes
+import com.logikamobile.fisioterapp.routing.configureSessionRoutes
+import com.logikamobile.fisioterapp.routing.configureTransactionRoutes
 import io.ktor.server.application.*
 
 fun main(args: Array<String>) {
@@ -13,6 +14,7 @@ fun main(args: Array<String>) {
 fun Application.module() {
     configureSerialization()
     configureDatabases()
-    patientRouting()
-    transactionRoutes()
+    configureTransactionRoutes()
+    configureSessionRoutes()
+    configurePatientRoutes()
 }

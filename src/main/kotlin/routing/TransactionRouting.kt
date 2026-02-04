@@ -16,7 +16,7 @@ import org.jetbrains.exposed.sql.selectAll
 import org.jetbrains.exposed.sql.transactions.transaction
 import java.time.LocalDate
 
-fun Application.transactionRoutes() {
+fun Application.configureTransactionRoutes() {
     routing {
         route("/transactions") {
             get {

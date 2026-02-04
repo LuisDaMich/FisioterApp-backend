@@ -16,7 +16,7 @@ import org.jetbrains.exposed.sql.SqlExpressionBuilder.eq
 import org.jetbrains.exposed.sql.transactions.transaction
 import java.time.LocalDate
 
-fun Application.patientRouting() {
+fun Application.configurePatientRoutes() {
     routing {
         route("/patients") {
             get {
