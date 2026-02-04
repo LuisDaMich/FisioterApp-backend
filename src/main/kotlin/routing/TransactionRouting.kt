@@ -1,7 +1,7 @@
 package com.logikamobile.fisioterapp.routing
 
-import com.logikamobile.fisioterapp.model.BalanceDTO
-import com.logikamobile.fisioterapp.model.TransactionDTO
+import com.logikamobile.fisioterapp.model.dto.BalanceDTO
+import com.logikamobile.fisioterapp.model.dto.TransactionDTO
 import com.logikamobile.fisioterapp.PatientsTable
 import com.logikamobile.fisioterapp.TransactionsTable
 import io.ktor.http.*

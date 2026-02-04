@@ -1,4 +1,4 @@
-package com.logikamobile.fisioterapp.model
+package com.logikamobile.fisioterapp.model.dto
 
 import kotlinx.serialization.Serializable
 

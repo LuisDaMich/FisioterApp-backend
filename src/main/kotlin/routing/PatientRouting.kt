@@ -1,6 +1,6 @@
 package com.logikamobile.fisioterapp.routing
 
-import com.logikamobile.fisioterapp.model.PatientDTO
+import com.logikamobile.fisioterapp.model.dto.PatientDTO
 import com.logikamobile.fisioterapp.PatientsTable
 import io.ktor.http.*
 import io.ktor.http.content.PartData
