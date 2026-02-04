@@ -17,7 +17,7 @@ class PatientStatusService {
      */
     fun activatePatient(patientId: Int) {
         transaction {
-            val currentStatus = PatientsTable.select { PatientsTable.id eq patientId }
+            val currentStatus = PatientsTable.selectAll().where { PatientsTable.id eq patientId }
                 .map { it[PatientsTable.status] }
                 .singleOrNull()
 
