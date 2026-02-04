@@ -17,7 +17,7 @@ import org.jetbrains.exposed.sql.transactions.transaction
 import java.time.LocalDate
 import java.time.LocalDateTime
 
-fun Application.configureRouting() {
+fun Application.patientRouting() {
     routing {
         get("/") {
             call.respondText("FisioterApp Server, up and running")

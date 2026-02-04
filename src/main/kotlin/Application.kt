@@ -9,5 +9,5 @@ fun main(args: Array<String>) {
 fun Application.module() {
     configureSerialization()
     configureDatabases()
-    configureRouting()
+    patientRouting()
 }
