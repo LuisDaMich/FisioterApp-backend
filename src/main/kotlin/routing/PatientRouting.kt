@@ -19,6 +19,17 @@ import java.time.LocalDate
 fun Application.configurePatientRoutes() {
     routing {
         route("/patients") {
+            post("/refresh-statuses") {
+                try {
+                    val service = com.logikamobile.fisioterapp.services.PatientStatusService()
+                    val count = service.detectAndMarkDropouts()
+                    call.respond(HttpStatusCode.OK, "Proceso finalizado. $count pacientes marcados como Interrumpidos.")
+                } catch (e: Exception) {
+                    call.respond(HttpStatusCode.InternalServerError, "Error actualizando estados: ${e.localizedMessage}")
+                }
+            }
+
+// ...
             get {
                 try {
                     val patientList = transaction {
