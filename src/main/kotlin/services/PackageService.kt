@@ -1,12 +1,16 @@
 package com.logikamobile.fisioterapp.services
 
-import com.logikamobile.fisioterapp.SessionsTable
-import com.logikamobile.fisioterapp.TransactionsTable
+import com.logikamobile.fisioterapp.data.EvaluationsTable
+import com.logikamobile.fisioterapp.data.PatientsTable
+import com.logikamobile.fisioterapp.data.SessionsTable
+import com.logikamobile.fisioterapp.data.TransactionsTable
 import com.logikamobile.fisioterapp.model.dto.SessionDTO
+import org.jetbrains.exposed.dao.id.EntityID
 import org.jetbrains.exposed.sql.*
 import org.jetbrains.exposed.sql.selectAll
 import org.jetbrains.exposed.sql.transactions.transaction
 import java.time.LocalDate
+import java.time.LocalDateTime
 
 class PackageService {
 
@@ -32,9 +36,9 @@ class PackageService {
                 throw IllegalStateException("Paquete agotado. Se han usado $usedSessions de $totalSessionsInPackage sesiones.")
             }
             SessionsTable.insert {
-                it[this.patientId] = org.jetbrains.exposed.dao.id.EntityID(patientId, com.logikamobile.fisioterapp.PatientsTable)
-                it[this.transactionId] = org.jetbrains.exposed.dao.id.EntityID(transactionId, TransactionsTable) // Vinculación Crítica
-                it[evaluationId] = sessionData.evaluationId?.let { id -> org.jetbrains.exposed.dao.id.EntityID(id, com.logikamobile.fisioterapp.EvaluationsTable) }
+                it[this.patientId] = EntityID(patientId, PatientsTable)
+                it[this.transactionId] = EntityID(transactionId, TransactionsTable) // Vinculación Crítica
+                it[evaluationId] = sessionData.evaluationId?.let { id -> EntityID(id, EvaluationsTable) }
                 it[date] = LocalDate.parse(sessionData.date)
                 it[sessionNumber] = (usedSessions + 1).toInt() // Autonumérico basado en el paquete
                 it[subjective] = sessionData.subjective
@@ -44,7 +48,7 @@ class PackageService {
                 it[paymentStatus] = "Paquete ($currentSessionNum/$totalSessionsInPackage)"
                 it[cost] = 0.0 // Costo nominal cero
                 it[this.notes] = sessionData.notes
-                it[nextAppointment] = sessionData.nextAppointment?.let { d -> java.time.LocalDateTime.parse(d) }
+                it[nextAppointment] = sessionData.nextAppointment?.let { d -> LocalDateTime.parse(d) }
             }
         }
     }

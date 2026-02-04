@@ -2,13 +2,14 @@ package com.logikamobile.fisioterapp.routing
 
 import com.logikamobile.fisioterapp.model.dto.BalanceDTO
 import com.logikamobile.fisioterapp.model.dto.TransactionDTO
-import com.logikamobile.fisioterapp.PatientsTable
-import com.logikamobile.fisioterapp.TransactionsTable
+import com.logikamobile.fisioterapp.data.PatientsTable
+import com.logikamobile.fisioterapp.data.TransactionsTable
 import io.ktor.http.*
 import io.ktor.server.application.*
 import io.ktor.server.request.*
 import io.ktor.server.response.*
 import io.ktor.server.routing.*
+import org.jetbrains.exposed.dao.id.EntityID
 import org.jetbrains.exposed.sql.*
 import org.jetbrains.exposed.sql.SqlExpressionBuilder.eq
 import org.jetbrains.exposed.sql.selectAll
@@ -78,7 +79,7 @@ fun Application.transactionRoutes() {
                             it[notes] = dto.notes
                             // Vinculamos al paciente solo si viene el ID
                             it[patientId] = dto.patientId?.let { id ->
-                                org.jetbrains.exposed.dao.id.EntityID(id, PatientsTable)
+                                EntityID(id, PatientsTable)
                             }
                         }
                     }
