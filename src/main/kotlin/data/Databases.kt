@@ -1,4 +1,4 @@
-package com.logikamobile.fisioterapp
+package com.logikamobile.fisioterapp.data
 
 import io.ktor.server.application.Application
 import org.jetbrains.exposed.dao.id.IntIdTable
@@ -6,6 +6,7 @@ import org.jetbrains.exposed.sql.*
 import org.jetbrains.exposed.sql.transactions.transaction
 import org.jetbrains.exposed.sql.javatime.date
 import org.jetbrains.exposed.sql.javatime.datetime
+import java.time.LocalDateTime
 
 fun Application.configureDatabases() {
     Database.connect(
@@ -35,7 +36,7 @@ object PatientsTable : IntIdTable("patients") {
     val address = varchar("address", 200).nullable()
     val emergencyContact = varchar("emergency_contact", 100).nullable()
     val emergencyPhone = varchar("emergency_phone", 20).nullable()
-    val registrationDate = datetime("registration_date").clientDefault { java.time.LocalDateTime.now() }
+    val registrationDate = datetime("registration_date").clientDefault { LocalDateTime.now() }
     val internalId = varchar("internal_id", 20).nullable()
     val status = varchar("status", 50).default("Agendado")
 }

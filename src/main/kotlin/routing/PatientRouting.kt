@@ -1,7 +1,7 @@
 package com.logikamobile.fisioterapp.routing
 
-import com.logikamobile.fisioterapp.model.PatientDTO
-import com.logikamobile.fisioterapp.PatientsTable
+import com.logikamobile.fisioterapp.model.dto.PatientDTO
+import com.logikamobile.fisioterapp.data.PatientsTable
 import io.ktor.http.*
 import io.ktor.http.content.PartData
 import io.ktor.http.content.forEachPart
@@ -16,9 +16,20 @@ import org.jetbrains.exposed.sql.SqlExpressionBuilder.eq
 import org.jetbrains.exposed.sql.transactions.transaction
 import java.time.LocalDate
 
-fun Application.patientRouting() {
+fun Application.configurePatientRoutes() {
     routing {
         route("/patients") {
+            post("/refresh-statuses") {
+                try {
+                    val service = com.logikamobile.fisioterapp.services.PatientStatusService()
+                    val count = service.detectAndMarkDropouts()
+                    call.respond(HttpStatusCode.OK, "Proceso finalizado. $count pacientes marcados como Interrumpidos.")
+                } catch (e: Exception) {
+                    call.respond(HttpStatusCode.InternalServerError, "Error actualizando estados: ${e.localizedMessage}")
+                }
+            }
+
+// ...
             get {
                 try {
                     val patientList = transaction {
